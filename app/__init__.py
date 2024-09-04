@@ -7,7 +7,7 @@ from flask_cors import CORS  # Importa CORS
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_objeImplementingct(Config)
 
     # Habilitar CORS para toda la aplicación
     CORS(app)  # Esto habilita CORS para toda la API
