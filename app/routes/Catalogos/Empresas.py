@@ -8,8 +8,6 @@ actEmpresa_bp = Blueprint('ActEmpresa', __name__)
 verEmpresaID_bp = Blueprint('VerEmpresaID', __name__)
 
 
-
-
 @empresas_bp.route('/Catalogos/Empresas/empresas', methods=['GET'])
 @jwt_required()
 def empresas_route():

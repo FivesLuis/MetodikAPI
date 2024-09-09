@@ -13,8 +13,6 @@ def login_route():
     Contrasena = data.get('Contrasena')
     Empresa = data.get('Empresa')
 
-    print("Datos recibidos:", Correo, Contrasena, Empresa)  
-
     if Correo is None or Contrasena is None or Empresa is None:
         return jsonify({"error": "Faltan datos requeridos"}), 400
 

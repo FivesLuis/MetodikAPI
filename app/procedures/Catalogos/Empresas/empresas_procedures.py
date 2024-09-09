@@ -17,7 +17,9 @@ def VerEmpresas():
 
         columns = [column[0] for column in cursor.description]
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
         return jsonify(results)
+    
     except pyodbc.Error as e:
         return jsonify({"error": str(e)}), 500
     finally:
@@ -70,6 +72,7 @@ def actEmpresa(data):
 
         columns = [column[0] for column in cursor.description]
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        
         return results, 200  
     except pyodbc.Error as e:
         return {"error": str(e)}, 500  
