@@ -8,6 +8,3 @@ def VerRutasResumen(ID):
 
 def ActRuta(data):
     return actRutas(data)
-
-
-

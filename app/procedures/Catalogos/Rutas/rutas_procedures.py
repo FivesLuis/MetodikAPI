@@ -7,20 +7,33 @@ def verRutas():
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
+
+        # Execute the stored procedure
         cursor.execute("EXEC spVerRutas")
         
+        # Advance through multiple result sets (if necessary)
         while cursor.description is None:
             cursor.nextset()
 
+        # Check if we have valid result set
         if cursor.description is None:
             return jsonify({"error": "No data returned from the procedure."}), 500
 
+        # Fetch column names
         columns = [column[0] for column in cursor.description]
+
+        # Fetch all rows
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
-        return jsonify(results)
+
+        # Return results as JSON
+        return jsonify(results), 200
+
     except pyodbc.Error as e:
+        # Log the error and return a 500 response
         return jsonify({"error": str(e)}), 500
+
     finally:
+        # Ensure the connection is closed
         if conn:
             close_db_connection(conn)
 
@@ -67,6 +80,8 @@ def actRutas(data):
         
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
 
+        cursor.close()
+        
         return results, 200
     
     except pyodbc.Error as e:
