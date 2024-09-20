@@ -66,9 +66,24 @@ def actRutas(data):
         cursor = conn.cursor()
         conn.autocommit = True  # Asegúrate de que las transacciones se confirmen automáticamente
         
-        query = "EXEC spActRuta ?,?,?,?,? ,?,?,?,?,? ,?"
-        cursor.execute(query, data.get('ID'),data.get('Ruta'),data.get('Zona'),data.get('Kms'),data.get('Costo'),data.get('SucursalD'),data.get('DestinoDID'),
-                data.get('DestinoAID'),data.get('Observaciones'),data.get('EstatusID'),data.get('Tiempo'))
+        query = "EXEC spActRuta ?,?,?,?,? ,?,?,?,?,? ,?,?,?,?,? , ?"
+        cursor.execute(query, 
+                       data.get('ID'),
+                       data.get('Ruta'),
+                       data.get('Zona'),
+                       data.get('Kms'),
+                       data.get('Costo'),
+                       data.get('SucursalID'),
+                       data.get('DestinoID'),
+                       data.get('OrigenID'),
+                       data.get('Observaciones'),
+                       data.get('EstatusID'),
+                       data.get('Tiempo'),
+                       data.get('Fecha'),
+                       data.get('VehiculoID'),
+                       data.get('CostoInfantil'),
+                       data.get('CostoAdulto'),
+                       data.get('CostoInapan'))
         
         while cursor.description is None:
             cursor.nextset()
@@ -87,7 +102,7 @@ def actRutas(data):
     except pyodbc.Error as e:
 
         print(e)
-        return jsonify({"error": str(e)}), 500
+        return ({"error": str(e)}), 500
     
     finally:
         if conn:
@@ -138,15 +153,12 @@ def actHorarioRuta(data):
         cursor = conn.cursor()
         conn.autocommit = True  # Asegúrate de que las transacciones se confirmen automáticamente
         
-        query = "EXEC spActHorarioRuta ?,?,?,?,? ,?,?"
+        query = "EXEC spActHorarioRuta ?,?,?"
         cursor.execute(query, 
             data.get('ID'),
             data.get('RutaID'),
             data.get('HorarioID'),
-            data.get('VehiculoID'),
-            data.get('CostoInfantil'),
-            data.get('CostoAdulto'), 
-            data.get('CostoInapan'))
+        )
 
         while cursor.description is None:
             cursor.nextset()
@@ -164,7 +176,7 @@ def actHorarioRuta(data):
         return results, 200
     
     except pyodbc.Error as e:
-        return jsonify({"error": str(e)}), 500
+        return ({"error": str(e)}), 500
     
     finally:
         if conn:
@@ -185,7 +197,7 @@ def verRutasHorarios(rutaID):
 
         # Check if we have valid result set
         if cursor.description is None:
-            return jsonify({"error": "No data returned from the procedure."}), 500
+            return ({"error": "No data returned from the procedure."}), 500
 
         # Fetch column names
         columns = [column[0] for column in cursor.description]
@@ -201,7 +213,7 @@ def verRutasHorarios(rutaID):
     except pyodbc.Error as e:
         # Log the error and return a 500 response
         print(e)
-        return jsonify({"error": str(e)}), 500
+        return ({"error": str(e)}), 500
 
     finally:
         # Ensure the connection is closed
