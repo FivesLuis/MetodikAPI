@@ -30,6 +30,7 @@ from app.routes.Catalogos.Clientes import *
 def register_routes(app: Flask):
     # Login
     app.register_blueprint(login_bp)
+    app.register_blueprint(verEmpresasUsuario_bp)
 
     # Indicadores
     app.register_blueprint(verIndicadores_bp)
@@ -51,6 +52,8 @@ def register_routes(app: Flask):
     app.register_blueprint(verModulosAcceso_bp)  
     app.register_blueprint(actAccesosPerfil_bp)  
     app.register_blueprint(crearMenus_bp)  
+    app.register_blueprint(actModuloFavorito_bp)  
+    app.register_blueprint(verModulosFavoritos_bp)  
 
     ##Catalogo Empresas
 

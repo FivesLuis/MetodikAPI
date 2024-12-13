@@ -8,6 +8,8 @@ actPerfil_bp = Blueprint('actPerfil', __name__)
 verModulosAcceso_bp = Blueprint('verModulosAcceso', __name__)
 actAccesosPerfil_bp = Blueprint('actAccesosPerfil', __name__)
 crearMenus_bp = Blueprint('crearMenus', __name__)
+actModuloFavorito_bp = Blueprint('actModuloFavorito', __name__)
+verModulosFavoritos_bp = Blueprint('verModulosFavoritos', __name__)
 
 
 @verPerfiles_bp.route('/Catalogos/Perfiles/verPerfiles', methods=['GET'])
@@ -69,4 +71,24 @@ def verModulosAcceso_route():
     if PersonaID is None:
         return jsonify({"error": "Faltan datos requeridos"}), 400
     response = crearMenus(PersonaID)
+    return response
+
+@actModuloFavorito_bp.route('/Catalogos/Perfiles/actModuloFavorito', methods=['POST'])
+@jwt_required()
+def actModuloFavorito_route():
+    data = request.json
+    if data is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = actModuloFavorito(data)
+    return response
+
+
+@verModulosFavoritos_bp.route('/Catalogos/Perfiles/verModulosFavoritos', methods=['GET'])
+@jwt_required()
+def verModulosFavoritos_route():
+    PersonaID = request.args.get('PersonaID')
+
+    if PersonaID is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = verModulosFavoritos(PersonaID)
     return response
