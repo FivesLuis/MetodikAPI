@@ -1,10 +1,11 @@
 from flask import request, Blueprint, jsonify, Response
 from flask_jwt_extended import jwt_required
-from app.services.Configuracion.modulos_service import verModulos, verModuloID, actModulo
+from app.services.Configuracion.modulos_service import verModulos, verModuloID, actModulo, elimModulo
 
 verModulos_bp = Blueprint('verModulos', __name__)
 verModuloID_bp = Blueprint('verModuloID', __name__)
 actModulo_bp = Blueprint('actModulo', __name__)
+elimModulo_bp = Blueprint('elimModulo', __name__)
 
 
 
@@ -12,6 +13,7 @@ actModulo_bp = Blueprint('actModulo', __name__)
 @jwt_required()
 def modulos_route():
     data = request.json
+    
     if data is None:
         return jsonify({"error": "Faltan datos requeridos"}), 400
 
@@ -40,5 +42,15 @@ def verModuloID_route():
     response = verModuloID(ID)
     return response 
 
+@elimModulo_bp.route('/Configuracion/elimModulo', methods=['GET'])
+@jwt_required()
+def elimModulo_route():
+    ID = request.args.get('ID')
+
+    if ID is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+
+    response = elimModulo(ID)
+    return response
 
 
