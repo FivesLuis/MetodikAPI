@@ -17,6 +17,13 @@ guardarDatosPersonasReserva_bp = Blueprint('guardarDatosPersonasReserva', __name
 verPersonasReserva_bp = Blueprint('verPersonasReserva', __name__)
 agregarFormaPagoReserva_bp = Blueprint('agregarFormaPagoReserva', __name__)
 cambiarSituacion_bp = Blueprint('cambiarSituacion', __name__)
+eliminarReserva_bp = Blueprint('eliminarReserva', __name__)
+verPdfReserva_bp = Blueprint('verPdfReserva', __name__)
+
+agregarEquipajeDetalle_bp = Blueprint('agregarEquipajeDetalle', __name__)
+verEquipajeDetalle_bp = Blueprint('verEquipajeDetalle', __name__)
+actEquipajeDetalle_bp = Blueprint('actEquipajeDetalle', __name__)
+eliminarEquipaje_bp = Blueprint('eliminarEquipaje', __name__)
 
 
 
@@ -136,12 +143,11 @@ def guardarDatosPersonasReserva_route():
 @jwt_required()
 def verPersonasReserva_route():
     ID = request.args.get('ID')
-    HorarioRutaID = request.args.get('HorarioRutaID')
     RenglonID = request.args.get('RenglonID')
 
     if ID is None:
         return jsonify({"error": "Faltan datos requeridos"}), 400
-    response = verPersonasReserva(ID, HorarioRutaID, RenglonID)
+    response = verPersonasReserva(ID, RenglonID)
     return response
 
 @agregarFormaPagoReserva_bp.route('/Comercial/Reservas/agregarPagoReserva', methods=['POST'])
@@ -160,4 +166,65 @@ def cambiarSituacion_route():
     if data is None:
         return jsonify({"error": "Faltan datos requeridos"}), 400
     response = cambiarSituacion(data)
+    return response
+
+@eliminarReserva_bp.route('/Comercial/Reservas/eliminarReserva', methods=['DELETE'])
+@jwt_required()
+def eliminarReserva_route():
+    ID = request.args.get('ID')
+    UsuarioID = request.args.get('UsuarioID')
+    if ID is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = eliminarReserva(ID, UsuarioID)
+    return response
+
+@verPdfReserva_bp.route('/Comercial/Reservas/verPDFReserva', methods=['POST'])
+@jwt_required()
+def verPdfReserva_route():
+    data = request.json
+    if data is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = verPdfReserva(data)
+    return response
+
+
+@agregarEquipajeDetalle_bp.route('/Comercial/Reservas/AgregarEquipajeDetalle', methods=['POST'])
+@jwt_required()
+def agregarEquipajeDetalle_route():
+    data = request.json
+    if data is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = agregarEquipajeDetalle(data)
+    return response
+
+@verEquipajeDetalle_bp.route('/Comercial/Reservas/verEquipajeDetalle', methods=['GET'])
+@jwt_required()
+def verEquipajeDetalle_route():
+    ID = request.args.get('ID')
+
+    if ID is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = verEquipajeDetalle(ID)
+    return response
+
+
+@actEquipajeDetalle_bp.route('/Comercial/Reservas/actEquipajeDetalle', methods=['POST'])
+@jwt_required()
+def actEquipajeDetalle_route():
+    data = request.json
+    if data is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = actEquipajeDetalle(data)
+    return response
+
+@eliminarEquipaje_bp.route('/Comercial/Reservas/eliminarRenglonEquipaje', methods=['DELETE'])
+@jwt_required()
+def eliminarEquipaje_route():
+    ID = request.args.get('ID')
+    RenglonID = request.args.get('RenglonID')
+    PersonaID = request.args.get('PersonaID')
+
+    if ID is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = eliminarEquipaje(ID, RenglonID, PersonaID)
     return response

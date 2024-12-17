@@ -1,4 +1,44 @@
-Librerias a instalar
+# Librerias a instalar
+
+## Requerimientos
+
+1. Install poetry:
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+2. Añade poetry al PATH:
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+3. Asegurate que funcione:
+```bash
+poetry --version
+```
+
+---
+
+## Entorno de desarrollo
+
+1. Clona el repositorio y entra a la raiz del proyecto.
+
+2. En la raiz del proyecto ejecuta:
+```bash
+poetry install
+```
+
+3. Activa el entorno virtual:
+```bash
+source .venv/bin/activate
+```
+
+4. Run:
+```bash
+python3 run.py
+```
+
+---
 
 1. Flask
 Flask es el framework web que usaremos el funcionamiento de la API.
@@ -28,3 +68,12 @@ pip install flask-jwt-extended
 
 CORS
 pip install flask-cors
+
+sqlalchemy
+pip install sqlalchemy
+
+requests
+pip install requests
+
+Flask-SocketIO   
+pip install flask-socketio

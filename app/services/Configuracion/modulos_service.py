@@ -1,14 +1,14 @@
-from app.procedures.Configuracion.modulos_procedures import ver_Modulos, ver_ModuloID, eliminar_Modulo, act_modulo
+from app.procedures.Configuracion.modulos_procedures import *
 
-def verModulos():
-    return ver_Modulos()
+def verModulos(data):
+    return ver_Modulos(data)
 
 def actModulo(data):
-    return act_modulo(data)
-
-def eliminarModulo(ID):
-    return eliminar_Modulo(ID)
+    return act_Modulo(data)
 
 def verModuloID(ID):
     return ver_ModuloID(ID)
+
+def elimModulo(id):
+    return elim_Modulo(id)
 

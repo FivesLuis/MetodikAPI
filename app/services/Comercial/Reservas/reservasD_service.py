@@ -40,11 +40,29 @@ def agregarAsientosReserva(data):
 def guardarDatosPersonasReserva(data):
     return guardar_DatosPersonaReserva(data)
 
-def verPersonasReserva(ID, HorarioRutaID, RenglonID):
-    return ver_PersonasReserva(ID, HorarioRutaID, RenglonID)
+def verPersonasReserva(ID, RenglonID):
+    return ver_PersonasReserva(ID, RenglonID)
 
 def agregarFormaPagoReserva(data):
     return agregar_FormaPagoReserva(data)
 
 def cambiarSituacion(data):
     return cambiar_situacion(data)
+
+def eliminarReserva(ID, UsuarioID):
+    return eliminar_reserva(ID, UsuarioID)
+
+def verPdfReserva(data):
+    return ver_pdfReserva(data)
+
+def agregarEquipajeDetalle(data):
+    return agregar_equipajeDetalle(data)
+
+def verEquipajeDetalle(ID):
+    return verEquipaje_detalle(ID)
+
+def actEquipajeDetalle(data):
+    return act_EquipajeDetalle(data)
+
+def eliminarEquipaje(ID, RenglonID, PersonaID):
+    return eliminar_renglonEquipaje(ID, RenglonID, PersonaID)
