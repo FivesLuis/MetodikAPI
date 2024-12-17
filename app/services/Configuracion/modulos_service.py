@@ -9,3 +9,6 @@ def actModulo(data):
 def verModuloID(ID):
     return ver_ModuloID(ID)
 
+def elimModulo(id):
+    return elim_Modulo(id)
+
