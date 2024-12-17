@@ -27,10 +27,17 @@ from app.routes.Catalogos.Pasajeros import *
 from app.routes.Catalogos.Concepto import *
 from app.routes.Catalogos.Areas import *
 from app.routes.HelpDesk.Tickets import *
+from app.routes.Catalogos.Clientes import *
+from app.routes.files import *
+
 
 def register_routes(app: Flask):
+    # Files
+    app.register_blueprint(files_bp)
+
     # Login
     app.register_blueprint(login_bp)
+    app.register_blueprint(verEmpresasUsuario_bp)
 
     # Indicadores
     app.register_blueprint(verIndicadores_bp)
@@ -44,10 +51,7 @@ def register_routes(app: Flask):
     # Catalogo Usuarios
 
     app.register_blueprint(usuarios_bp)
-    app.register_blueprint(usuariosResumen_bp)
-    app.register_blueprint(actUsuario_bp)
-    app.register_blueprint(verUsuarioID_bp)
-
+    
     ##Catalogo Perfiles
 
     app.register_blueprint(verPerfiles_bp)  
@@ -56,6 +60,8 @@ def register_routes(app: Flask):
     app.register_blueprint(verModulosAcceso_bp)  
     app.register_blueprint(actAccesosPerfil_bp)  
     app.register_blueprint(crearMenus_bp)  
+    app.register_blueprint(actModuloFavorito_bp)  
+    app.register_blueprint(verModulosFavoritos_bp)  
 
     ##Catalogo Empresas
 
@@ -164,6 +170,11 @@ def register_routes(app: Flask):
     app.register_blueprint(verEquipoID_bp)
     app.register_blueprint(actEquipoD_bp)
     app.register_blueprint(eliminarEquipo_bp)
+
+    # Catalogo Clientes
+    app.register_blueprint(verClientes_bp)
+    app.register_blueprint(verClienteID_bp)
+    app.register_blueprint(actCliente_bp)
 
     # Explorador rutas
     app.register_blueprint(verExploradorRutas_bp)

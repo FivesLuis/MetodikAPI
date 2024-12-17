@@ -65,7 +65,10 @@ def crear_menus(PersonaID):
                 "active": True,
                 "children": None if item["Nombre"] in ["Inicio", "Soporte"] else [],
                 "to": item["NombreArchivo"] if item["NombreArchivo"] else f"/{item['Menu'].lower()}/{item['Nombre'].lower().replace(' ', '_')}",
-                "icon": item["Icono"] 
+                "icon": item["Icono"],
+                "Tipo": item["Tipo"],
+                "ModuloID": item["ModuloID"],
+                "isFavorite": item["isFavorite"]
             }
             menu_map[item["Nombre"]] = menu_entry
             # Clasificación en Dashboard o Modulos según el TipoMenu
@@ -83,7 +86,10 @@ def crear_menus(PersonaID):
                     "name": item["Nombre"],
                     "to": item["NombreArchivo"] if item["NombreArchivo"] else f"/{item['Menu'].lower()}/{item['Nombre'].lower().replace(' ', '_')}",
                     "active": True,
-                    "icon": item["Icono"] 
+                    "icon": item["Icono"],
+                    "Tipo": item["Tipo"],
+                    "ModuloID": item["ModuloID"],
+                    "isFavorite": item["isFavorite"]
                 }
                 # Agrega el submenú al menú principal correspondiente
                 parent_menu["children"].append(submenu_entry)
@@ -92,3 +98,18 @@ def crear_menus(PersonaID):
     final_menu = [dashboard_menu, modulos_menu]
 
     return final_menu
+
+def actModulo_Favorito(data):
+    sp_name = "spActModuloFavorito"
+    params = [
+        data.get("PersonaID"), 
+        data.get("ModuloID"), 
+        data.get("Favorito"),
+    ]
+    return execute_stored_procedure(sp_name, params)
+
+
+def verModulos_Favoritos(PersonaID):
+    sp_name = "spVerModulosFav"
+    params = [ PersonaID ]
+    return execute_stored_procedure(sp_name, params)

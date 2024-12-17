@@ -17,3 +17,9 @@ def actAccesosPerfil(data):
 
 def crearMenus(PersonaID):
     return crear_menus(PersonaID)
+
+def actModuloFavorito(data):
+    return actModulo_Favorito(data)
+
+def verModulosFavoritos(PersonaID):
+    return verModulos_Favoritos(PersonaID)
