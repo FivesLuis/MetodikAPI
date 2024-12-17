@@ -157,6 +157,7 @@ def register_routes(app: Flask):
     app.register_blueprint(verClientes_bp)
     app.register_blueprint(verClienteID_bp)
     app.register_blueprint(actCliente_bp)
+    app.register_blueprint(getPaisEstado_bp)
 
     # Explorador rutas
     app.register_blueprint(verExploradorRutas_bp)

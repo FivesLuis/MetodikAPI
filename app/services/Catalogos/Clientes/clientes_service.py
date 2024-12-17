@@ -1,4 +1,4 @@
-from app.procedures.Catalogos.Clientes.clientes_procedures import ver_ClienteID, ver_Clientes, act_Cliente
+from app.procedures.Catalogos.Clientes.clientes_procedures import ver_ClienteID, ver_Clientes, act_Cliente, get_PaisEstado
 
 
 def verClientes(data):
@@ -11,3 +11,7 @@ def verClienteID(ID):
 
 def actCliente(data):
     return act_Cliente(data)
+
+
+def getPaisEstado(data):
+    return get_PaisEstado(data)
