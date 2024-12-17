@@ -9,6 +9,12 @@ def ver_Clientes(data):
     ]
     return execute_stored_procedure(sp_name, params)
 
+def get_PaisEstado(data):
+    sp_name = "spGetPaisEstado"
+    params = [
+        data.get("CodigoPostal")
+    ]
+    return execute_stored_procedure(sp_name, params)
 
 def ver_ClienteID(ID):
     sp_name = "spVerClienteID"
