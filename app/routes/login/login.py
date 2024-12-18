@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify, Response
-from app.services.login.login_service import login
+from app.services.login.login_service import login, verEmpresasUsuario
 from flask_jwt_extended import create_access_token, jwt_required
 
 login_bp = Blueprint('login', __name__)
+verEmpresasUsuario_bp = Blueprint('verEmpresasUsuario', __name__)
 
 @login_bp.route('/login', methods=['POST'])
 def login_route():
@@ -45,3 +46,13 @@ def login_route():
 @jwt_required()
 def protected_route():
     return jsonify(message="Esta es una ruta protegida"), 200
+
+
+@verEmpresasUsuario_bp.route('/verEmpresasUsuario', methods=['GET'])
+@jwt_required()
+def verEmpresasUsuario_route():
+    PersonaID = request.args.get('PersonaID')
+    if PersonaID is None:
+        return jsonify({"error": "Faltan datos requeridos"}), 400
+    response = verEmpresasUsuario(PersonaID)
+    return response
