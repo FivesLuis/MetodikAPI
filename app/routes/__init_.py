@@ -30,7 +30,6 @@ from app.routes.HelpDesk.Tickets import *
 from app.routes.Catalogos.Clientes import *
 from app.routes.files import *
 
-
 def register_routes(app: Flask):
     # Files
     app.register_blueprint(files_bp)
