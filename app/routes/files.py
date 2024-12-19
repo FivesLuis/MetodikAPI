@@ -10,7 +10,7 @@ filesView_bp = Blueprint('filesView', __name__)
 
 BASE_URL = "http://127.0.0.1:5001"
 # Carpeta base donde se guardarán todos los archivos
-BASE_UPLOAD_FOLDER = './uploads'
+BASE_UPLOAD_FOLDER = os.path.abspath('uploads')
 if not os.path.exists(BASE_UPLOAD_FOLDER):
     os.makedirs(BASE_UPLOAD_FOLDER)
 
@@ -55,3 +55,17 @@ def subir_archivo():
         "path": public_url,
         "Ok": "0"
     }), 200
+
+@files_bp.route('/Archivos/<path:filename>', methods=['GET'])
+def descargar_archivo(filename):
+    """
+    Endpoint para servir un archivo previamente subido.
+    La ruta accesible será: /Archivos/<ruta_relativa>
+    Por ejemplo: /Archivos/Tickets/png/LogoNew.png
+    """
+    full_path = os.path.join(BASE_UPLOAD_FOLDER, filename)
+    print("Intentando servir:", full_path)
+    print("Existe el archivo?", os.path.isfile(full_path))
+
+    # Si el archivo no existe, se retornará 404 automáticamente
+    return send_from_directory(BASE_UPLOAD_FOLDER, filename)
