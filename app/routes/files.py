@@ -1,15 +1,28 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, send_from_directory, send_file
 from flask_jwt_extended import jwt_required
 import os
 from werkzeug.utils import secure_filename
 
 # Crear el blueprint
 files_bp = Blueprint('files', __name__)
+filesView_bp = Blueprint('filesView', __name__)
 
+
+BASE_URL = "http://127.0.0.1:5001"
 # Carpeta base donde se guardarán todos los archivos
 BASE_UPLOAD_FOLDER = './uploads'
 if not os.path.exists(BASE_UPLOAD_FOLDER):
     os.makedirs(BASE_UPLOAD_FOLDER)
+
+
+@filesView_bp.route('/uploads/<path:filename>', methods=['GET'])
+#@jwt_required()
+def serve_file(filename):
+    file_path = os.path.abspath(os.path.join(BASE_UPLOAD_FOLDER, filename))
+    print(f"Ruta intentada: {file_path}")  # Debug
+    if not os.path.exists(file_path):
+        return jsonify({"error": "Archivo no encontrado", "ruta_intentada": file_path}), 404
+    return send_file(file_path)
 
 @files_bp.route('/Archivos/subirArchivo', methods=['POST'])
 @jwt_required()
@@ -36,9 +49,9 @@ def subir_archivo():
     file.save(file_path)
 
     # Devolver la ruta relativa del archivo
-    relative_path = os.path.relpath(file_path, BASE_UPLOAD_FOLDER)
+    public_url = f"{BASE_URL}/uploads/{file_type}/{file_extension}/{filename}"
     return jsonify({
         "message": "Archivo subido con éxito",
-        "path": relative_path,
+        "path": public_url,
         "Ok": "0"
     }), 200
