@@ -33,6 +33,7 @@ from app.routes.files import *
 def register_routes(app: Flask):
     # Files
     app.register_blueprint(files_bp)
+    app.register_blueprint(filesView_bp)
 
     # Login
     app.register_blueprint(login_bp)
