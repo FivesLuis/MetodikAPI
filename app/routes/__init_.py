@@ -29,6 +29,8 @@ from app.routes.Catalogos.Areas import *
 from app.routes.HelpDesk.Tickets import *
 from app.routes.Catalogos.Clientes import *
 from app.routes.files import *
+from app.routes.Catalogos.Departamentos import *
+from app.routes.Catalogos.Proyectos import *
 
 def register_routes(app: Flask):
     # Files
@@ -247,3 +249,13 @@ def register_routes(app: Flask):
     app.register_blueprint(actComentario_bp)
     app.register_blueprint(verComentariosID_bp)
     app.register_blueprint(cancelarTicket_bp)
+
+    #Catalogo Departamentos
+    app.register_blueprint(verDepartamentos_bp)
+    app.register_blueprint(actDepartamento_bp)
+    app.register_blueprint(verDepartamentoID_bp)
+
+    #Catalogo Proyectos
+    app.register_blueprint(verProyectos_bp)
+    app.register_blueprint(actProyecto_bp)
+    app.register_blueprint(verProyectoID_bp)
