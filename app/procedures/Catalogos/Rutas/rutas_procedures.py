@@ -44,9 +44,9 @@ def act_DescensoRuta(data):
         data.get("DestinoID"),
         data.get("Tiempo"),
         data.get("Kilometros"),
-        data.get("PrecioNino"),
-        data.get("PrecioAdulto"),
-        data.get("PrecioInapam"),
+        # data.get("PrecioNino"),
+        # data.get("PrecioAdulto"),
+        # data.get("PrecioInapam"),
     ]
     return execute_stored_procedure(sp_name, params)
 

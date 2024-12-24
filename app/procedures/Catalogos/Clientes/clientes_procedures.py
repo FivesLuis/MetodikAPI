@@ -9,6 +9,12 @@ def ver_Clientes(data):
     ]
     return execute_stored_procedure(sp_name, params)
 
+def get_PaisEstado(data):
+    sp_name = "spGetPaisEstado"
+    params = [
+        data.get("CodigoPostal")
+    ]
+    return execute_stored_procedure(sp_name, params)
 
 def ver_ClienteID(ID):
     sp_name = "spVerClienteID"
@@ -29,6 +35,6 @@ def act_Cliente(data):
         #nuevos
         data.get("PedirTono"), data.get("PedidosParciales"), data.get("VtasConsignacion"), data.get("Conciliar"),
         data.get("CreditoEspecial"), data.get("CreditoConLimite"), data.get("CreditoConDias"), data.get("CreditoConCondiciones"),
-        data.get("EmpresaID")
+        data.get("EmpresaID"), data.get("RutaImagenPerfil"), data.get("RutaImagenBanner")
     ]
     return execute_stored_procedure(sp_name, params)

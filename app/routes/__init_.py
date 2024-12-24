@@ -24,12 +24,18 @@ from app.routes.Whatsapp.whatsapp import *
 from app.routes.Logistica.Rutas.Rutas import *
 from app.routes.Logistica.PreciosRuta.PreciosRuta import *
 from app.routes.Catalogos.Pasajeros import *
+from app.routes.Catalogos.Concepto import *
+from app.routes.Catalogos.Areas import *
+from app.routes.HelpDesk.Tickets import *
 from app.routes.Catalogos.Clientes import *
 from app.routes.files import *
+from app.routes.Catalogos.Departamentos import *
+from app.routes.Catalogos.Proyectos import *
 
 def register_routes(app: Flask):
     # Files
     app.register_blueprint(files_bp)
+    app.register_blueprint(filesView_bp)
 
     # Login
     app.register_blueprint(login_bp)
@@ -42,6 +48,7 @@ def register_routes(app: Flask):
     app.register_blueprint(verModulos_bp)
     app.register_blueprint(verModuloID_bp)
     app.register_blueprint(actModulo_bp)
+    app.register_blueprint(elimModulo_bp)
 
     # Catalogo Usuarios
 
@@ -119,6 +126,16 @@ def register_routes(app: Flask):
     app.register_blueprint(actSucursal_bp)
     app.register_blueprint(verSucursalID_bp)
 
+    #Catalogo Concepto
+    app.register_blueprint(verConceptos_bp)
+    app.register_blueprint(actConcepto_bp)
+    app.register_blueprint(verConceptoID_bp)
+
+    #Catalogo Areas
+    app.register_blueprint(verAreas_bp)
+    app.register_blueprint(actArea_bp)
+    app.register_blueprint(verAreaID_bp)
+
     # Catalogo Vehiculos
     app.register_blueprint(verVehiculos_bp)
     app.register_blueprint(actVehiculo_bp)
@@ -160,6 +177,7 @@ def register_routes(app: Flask):
     app.register_blueprint(verClientes_bp)
     app.register_blueprint(verClienteID_bp)
     app.register_blueprint(actCliente_bp)
+    app.register_blueprint(getPaisEstado_bp)
 
     # Explorador rutas
     app.register_blueprint(verExploradorRutas_bp)
@@ -223,3 +241,23 @@ def register_routes(app: Flask):
     app.register_blueprint(verPreciosRutas_bp)
     app.register_blueprint(actPreciosRuta_bp)
     app.register_blueprint(afectarCambioPreciosRuta_bp)
+
+    #Modulo Tickets
+    app.register_blueprint(verTickets_bp)
+    app.register_blueprint(actTicket_bp)
+    app.register_blueprint(verTicketID_bp)
+    app.register_blueprint(avanzaTicket_bp)
+    app.register_blueprint(reasignarTicket_bp)
+    app.register_blueprint(actComentario_bp)
+    app.register_blueprint(verComentariosID_bp)
+    app.register_blueprint(cancelarTicket_bp)
+
+    #Catalogo Departamentos
+    app.register_blueprint(verDepartamentos_bp)
+    app.register_blueprint(actDepartamento_bp)
+    app.register_blueprint(verDepartamentoID_bp)
+
+    #Catalogo Proyectos
+    app.register_blueprint(verProyectos_bp)
+    app.register_blueprint(actProyecto_bp)
+    app.register_blueprint(verProyectoID_bp)
