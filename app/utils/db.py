@@ -8,7 +8,7 @@ def get_db_connection():
     conn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};'
         'SERVER=' + os.getenv('SQL_SERVER') + ';'
-        'DATABASE=' + 'Metodik30' + ';'
+        'DATABASE=' + os.getenv('SQL_DATABASE') + ';'
         'UID=' + os.getenv('SQL_USER') + ';'
         'PWD=' + os.getenv('SQL_PASSWORD') + ';'
     )

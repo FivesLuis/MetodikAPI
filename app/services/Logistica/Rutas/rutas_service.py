@@ -41,3 +41,9 @@ def afectarRuta(data):
 
 def cambiarsituacionRuta(data):
     return cambiar_situacionRuta(data)
+
+def actGastoRuta(data):
+    return act_gastoRuta(data)
+
+def VerGastosRuta(ID):
+    return Ver_GastosRuta(ID)

@@ -216,7 +216,9 @@ def register_routes(app: Flask):
     app.register_blueprint(cancelarRuta_bp)
     app.register_blueprint(afectarRuta_bp)
     app.register_blueprint(cambiarsituacionRuta_bp)
-    
+    app.register_blueprint(actGastoRuta_bp)
+    app.register_blueprint(VerGastosRuta_bp)
+
     #Precios Rutas
     app.register_blueprint(verPreciosRutas_bp)
     app.register_blueprint(actPreciosRuta_bp)

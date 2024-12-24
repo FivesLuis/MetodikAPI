@@ -108,3 +108,19 @@ def cambiar_situacionRuta(data):
         data.get("Situacion"),
     ]
     return execute_stored_procedure(sp_name, params)
+
+def act_gastoRuta(data):
+    sp_name = "spActGastoRuta"
+    params = [
+        data.get("ID"), 
+        data.get("RenglonID"),
+        data.get("concepto"),
+        data.get("importe"),
+        data.get("referencia"),
+    ]
+    return execute_stored_procedure(sp_name, params)
+
+def Ver_GastosRuta(ID):
+    sp_name = "spVerGastosRuta"
+    params = [ID]
+    return execute_stored_procedure(sp_name, params)
