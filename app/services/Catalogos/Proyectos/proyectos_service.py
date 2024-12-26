@@ -4,7 +4,7 @@ def verProyectos(data):
     return ver_Proyectos(data)
 
 def actProyecto(data):
-    return act_Proyecto(data)
+    return act_Proyectos(data)
 
 def verProyectoID(ID):
     return ver_ProyectoID(ID)
